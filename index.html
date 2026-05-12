@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>コドンくじ</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    background:linear-gradient(to bottom,#eff6ff,#f8fafc);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    text-align:center;
+}
+
+.container{
+    max-width:760px;
+    margin:auto;
+    background:white;
+    border-radius:24px;
+    padding:28px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+
+h1{
+    margin-bottom:6px;
+    font-size:38px;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:26px;
+}
+
+.explanation{
+    text-align:left;
+    background:#f8fafc;
+    border-radius:18px;
+    padding:22px;
+    line-height:1.9;
+    margin-bottom:28px;
+    font-size:16px;
+}
+
+.highlight{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.startLucky{
+    margin-top:18px;
+    background:linear-gradient(135deg,#fde68a,#facc15);
+    color:#7c2d12;
+    border-radius:18px;
+    padding:18px;
+    font-size:28px;
+    font-weight:900;
+    animation:startLuckyAnim 0.9s ease infinite alternate;
+    box-shadow:0 0 20px rgba(250,204,21,0.7);
+}
+
+@keyframes startLuckyAnim{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.05);
+    }
+}
+
+/* セントラルドグマ図 */
+
+.centralDogma{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:24px 0;
+    overflow-x:auto;
+    padding-bottom:4px;
+}
+
+.cdBox{
+    color:white;
+    border-radius:16px;
+    padding:14px 16px;
+    min-width:110px;
+    text-align:center;
+    flex-shrink:0;
+    box-shadow:0 4px 14px rgba(0,0,0,0.15);
+}
+
+.cdDNA{
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.cdRNA{
+    background:linear-gradient(135deg,#10b981,#059669);
+}
+
+.cdProtein{
+    background:linear-gradient(135deg,#f97316,#ea580c);
+}
+
+.cdTitle{
+    font-size:20px;
+    font-weight:800;
+}
+
+.cdDesc{
+    font-size:11px;
+    margin-top:4px;
+    opacity:0.95;
+    line-height:1.4;
+}
+
+.cdArrow{
+    text-align:center;
+    color:#64748b;
+    flex-shrink:0;
+}
+
+.cdArrowText{
+    font-size:11px;
+    font-weight:700;
+}
+
+.cdArrowSymbol{
+    font-size:26px;
+    line-height:1;
+}
+
+/* スロット */
+
+.machine{
+    margin:30px auto;
+    padding:30px 16px;
+    border-radius:24px;
+    background:
+    linear-gradient(to bottom,#60a5fa,#2563eb);
+    border:5px solid #93c5fd;
+    box-shadow:
+    inset 0 3px 10px rgba(255,255,255,0.3),
+    0 10px 25px rgba(37,99,235,0.35);
+}
+
+.machineGlow{
+    animation:machineGlowAnim 0.5s infinite alternate;
+}
+
+@keyframes machineGlowAnim{
+    from{
+        box-shadow:
+        0 0 10px #60a5fa,
+        0 0 20px #60a5fa;
+    }
+    to{
+        box-shadow:
+        0 0 25px #2563eb,
+        0 0 50px #2563eb;
+    }
+}
+
+#slotContainer{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:24px;
+}
+
+.slot{
+    width:90px;
+    height:110px;
+    background:white;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:60px;
+    font-weight:bold;
+    color:#1d4ed8;
+    position:relative;
+    overflow:hidden;
+    box-shadow:
+    inset 0 -8px 16px rgba(0,0,0,0.08),
+    0 4px 10px rgba(0,0,0,0.2);
+}
+
+.slot::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:30%;
+    background:rgba(255,255,255,0.35);
+}
+
+.slotSpinning{
+    animation:slotSpin 0.07s linear infinite;
+}
+
+@keyframes slotSpin{
+    0%{
+        transform:translateY(-4px);
+    }
+    50%{
+        transform:translateY(4px);
+    }
+    100%{
+        transform:translateY(-4px);
+    }
+}
+
+.flash{
+    animation:flashAnim 0.35s ease;
+}
+
+@keyframes flashAnim{
+    0%{
+        transform:scale(1.2);
+        background:#fde68a;
+    }
+    100%{
+        transform:scale(1);
+        background:white;
+    }
+}
+
+.bigWin{
+    animation:bigWinAnim 0.9s ease;
+}
+
+@keyframes bigWinAnim{
+    0%{
+        transform:scale(0.95);
+    }
+    35%{
+        transform:scale(1.08);
+    }
+    60%{
+        transform:scale(0.98);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+button{
+    border:none;
+    border-radius:18px;
+    background:#facc15;
+    color:#111827;
+    font-size:24px;
+    font-weight:bold;
+    padding:16px 28px;
+    cursor:pointer;
+    width:100%;
+    max-width:320px;
+    box-shadow:0 5px 14px rgba(0,0,0,0.18);
+    transition:0.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+button:disabled{
+    background:#cbd5e1;
+    cursor:not-allowed;
+}
+
+.section{
+    margin-top:30px;
+    text-align:left;
+}
+
+.section h2{
+    border-bottom:2px solid #dbeafe;
+    padding-bottom:8px;
+}
+
+.box{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:18px;
+    line-height:1.8;
+    margin-top:12px;
+}
+
+.aminoName{
+    font-size:42px;
+    font-weight:800;
+    color:#1d4ed8;
+    margin-bottom:10px;
+}
+
+.footer{
+    margin-top:34px;
+    color:#666;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .slot{
+        width:72px;
+        height:88px;
+        font-size:46px;
+    }
+
+    button{
+        font-size:20px;
+    }
+
+    .aminoName{
+        font-size:34px;
+    }
+
+    .startLucky{
+        font-size:22px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>コドンくじ</h1>
+
+<div class="subtitle">
+2026五月祭 東大医学部企画
+</div>
+
+<div class="explanation">
+
+<h2>コドンとは？</h2>
+
+私たちの体は、およそ37兆個の細胞からできています。<br>
+その細胞の中では、
+「どんなタンパク質を作るか」
+という情報が常に読み取られています。<br><br>
+
+その設計図となるのが
+<span class="highlight">DNA</span>
+です。<br>
+
+DNAの情報はまず
+<span class="highlight">RNA</span>
+にコピーされ、
+その後「翻訳」という過程を通して
+<span class="highlight">タンパク質</span>
+が作られます。<br><br>
+
+この流れを
+<span class="highlight">セントラルドグマ</span>
+と呼びます。
+
+<div class="centralDogma">
+
+<div class="cdBox cdDNA">
+<div class="cdTitle">DNA</div>
+<div class="cdDesc">
+遺伝情報を保存する<br>
+設計図
+</div>
+</div>
+
+<div class="cdArrow">
+<div class="cdArrowText">転写</div>
+<div class="cdArrowSymbol">→</div>
+</div>
+
+<div class="cdBox cdRNA">
+<div class="cdTitle">RNA</div>
+<div class="cdDesc">
+DNAを書き写した<br>
+作業用コピー
+</div>
+</div>
+
+<div class="cdArrow">
+<div class="cdArrowText">翻訳</div>
+<div class="cdArrowSymbol">→</div>
+</div>
+
+<div class="cdBox cdProtein">
+<div class="cdTitle">タンパク質</div>
+<div class="cdDesc">
+体を作り<br>
+働く分子
+</div>
+</div>
+
+</div>
+
+RNAの配列は、
+<span class="highlight">3文字ずつ</span>
+区切って読まれます。<br>
+
+この3文字セットを
+<span class="highlight">コドン</span>
+と呼びます。<br><br>
+
+例えば
+<span class="highlight">AUG</span>
+というコドンは、
+アミノ酸「メチオニン」を指定するだけでなく、
+「ここからタンパク質合成を始める」
+という特別な意味を持っています。<br><br>
+
+つまりコドンは、
+生物の体を作るための
+「3文字の暗号」
+なのです。
+
+</div>
+
+<div class="machine" id="machine">
+
+<div id="slotContainer">
+<div class="slot" id="slot1">?</div>
+<div class="slot" id="slot2">?</div>
+<div class="slot" id="slot3">?</div>
+</div>
+
+<button id="drawButton" onclick="drawCodon()">
+くじを引く
+</button>
+
+</div>
+
+<div class="section">
+<h2>アミノ酸</h2>
+<div class="box" id="amino">
+まだ引かれていません
+</div>
+</div>
+
+<div class="section">
+<h2>コドン解説</h2>
+<div class="box" id="codonInfo">
+まだ引かれていません
+</div>
+</div>
+
+<div class="footer">
+A / U / G / C からランダムに3文字を生成
+</div>
+
+</div>
+
+<script>
+
+const aminoInfo = {
+
+"Phe":"フェニルアラニン：芳香族アミノ酸。",
+"Leu":"ロイシン：BCAA。",
+"Ser":"セリン：リン酸化されやすい。",
+"Tyr":"チロシン：神経伝達物質前駆体。",
+"Cys":"システイン：S-S結合を形成。",
+"Trp":"トリプトファン：セロトニン前駆体。",
+"Pro":"プロリン：特殊な環状構造。",
+"His":"ヒスチジン：酵素活性中心に多い。",
+"Gln":"グルタミン：窒素輸送に重要。",
+"Arg":"アルギニン：NO合成に関与。",
+"Ile":"イソロイシン：BCAA。",
+"Met":"メチオニン：開始コドン。",
+"Thr":"スレオニン：極性アミノ酸。",
+"Asn":"アスパラギン：糖鎖修飾。",
+"Lys":"リシン：ヒストン修飾。",
+"Val":"バリン：BCAA。",
+"Ala":"アラニン。",
+"Asp":"アスパラギン酸。",
+"Glu":"グルタミン酸：興奮性神経伝達物質。",
+"Gly":"グリシン：最小のアミノ酸。",
+"STOP":"終止コドン。"
+};
+
+const codonDescriptions = {
+
+"AUG":"開始コドン。",
+"UAA":"終止コドン。",
+"UAG":"終止コドン。",
+"UGA":"終止コドン。"
+};
+
+const codonTable = {
+
+"UUU":"Phe","UUC":"Phe",
+"UUA":"Leu","UUG":"Leu",
+"UCU":"Ser","UCC":"Ser","UCA":"Ser","UCG":"Ser",
+"UAU":"Tyr","UAC":"Tyr",
+"UAA":"STOP","UAG":"STOP",
+"UGU":"Cys","UGC":"Cys",
+"UGA":"STOP","UGG":"Trp",
+"CUU":"Leu","CUC":"Leu","CUA":"Leu","CUG":"Leu",
+"CCU":"Pro","CCC":"Pro","CCA":"Pro","CCG":"Pro",
+"CAU":"His","CAC":"His",
+"CAA":"Gln","CAG":"Gln",
+"CGU":"Arg","CGC":"Arg","CGA":"Arg","CGG":"Arg",
+"AUU":"Ile","AUC":"Ile","AUA":"Ile",
+"AUG":"Met",
+"ACU":"Thr","ACC":"Thr","ACA":"Thr","ACG":"Thr",
+"AAU":"Asn","AAC":"Asn",
+"AAA":"Lys","AAG":"Lys",
+"AGU":"Ser","AGC":"Ser",
+"AGA":"Arg","AGG":"Arg",
+"GUU":"Val","GUC":"Val","GUA":"Val","GUG":"Val",
+"GCU":"Ala","GCC":"Ala","GCA":"Ala","GCG":"Ala",
+"GAU":"Asp","GAC":"Asp",
+"GAA":"Glu","GAG":"Glu",
+"GGU":"Gly","GGC":"Gly","GGA":"Gly","GGG":"Gly"
+
+};
+
+function playBeep(freq,duration){
+
+    const audioCtx =
+    new (window.AudioContext || window.webkitAudioContext)();
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "square";
+    osc.frequency.value = freq;
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    gain.gain.setValueAtTime(0.06,audioCtx.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioCtx.currentTime + duration/1000
+    );
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration/1000);
+}
+
+function playWin(){
+
+    playBeep(700,120);
+
+    setTimeout(()=>{
+        playBeep(1000,180);
+    },120);
+}
+
+async function drawCodon(){
+
+    const button =
+    document.getElementById("drawButton");
+
+    const machine =
+    document.getElementById("machine");
+
+    button.disabled = true;
+    button.textContent = "抽選中...";
+
+    machine.classList.add("machineGlow");
+
+    const bases = ["A","U","G","C"];
+
+    let codon = "";
+
+    for(let i=1;i<=3;i++){
+
+        const slot =
+        document.getElementById("slot"+i);
+
+        slot.classList.add("slotSpinning");
+
+        let spinInterval = setInterval(()=>{
+
+            slot.textContent =
+            bases[Math.floor(Math.random()*4)];
+
+            playBeep(180 + Math.random()*120,30);
+
+        },70);
+
+        await new Promise(resolve =>
+            setTimeout(resolve,1000 + i*250)
+        );
+
+        clearInterval(spinInterval);
+
+        slot.classList.remove("slotSpinning");
+
+        const finalBase =
+        bases[Math.floor(Math.random()*4)];
+
+        slot.textContent = finalBase;
+
+        codon += finalBase;
+
+        slot.classList.remove("flash");
+        void slot.offsetWidth;
+        slot.classList.add("flash");
+
+        playBeep(500,80);
+
+        if(i === 3){
+
+            machine.classList.add("bigWin");
+            playWin();
+        }
+    }
+
+    const amino = codonTable[codon];
+
+    const aminoText =
+    "<div class='aminoName'>" +
+    amino +
+    "</div>" +
+    aminoInfo[amino];
+
+    let codonText =
+    codonDescriptions[codon] ||
+    codon + " は " + amino + " をコードするコドン。";
+
+    if(codon === "AUG"){
+
+        codonText +=
+        "<div class='startLucky'>開始コドン！ラッキー！</div>" +
+        "<br><b>AUGはタンパク質合成のスタート地点として働く特別なコドンです。</b>";
+
+        playBeep(1200,250);
+
+        setTimeout(()=>{
+            playBeep(1500,300);
+        },200);
+    }
+
+    if(amino === "STOP"){
+        codonText +=
+        "<br><br><b>タンパク質合成終了！</b>";
+    }
+
+    document.getElementById("amino").innerHTML =
+    aminoText;
+
+    document.getElementById("codonInfo").innerHTML =
+    codonText;
+
+    button.textContent = "抽選終了";
+}
+
+</script>
+
+</body>
+</html>
