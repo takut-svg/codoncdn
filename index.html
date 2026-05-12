@@ -8,41 +8,48 @@
 
 <style>
 
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
-    padding:20px;
+    padding:16px;
     background:linear-gradient(to bottom,#eff6ff,#f8fafc);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     text-align:center;
+    color:#0f172a;
 }
 
 .container{
+    width:100%;
     max-width:760px;
     margin:auto;
     background:white;
     border-radius:24px;
-    padding:28px 20px;
+    padding:24px 16px;
     box-shadow:0 10px 30px rgba(0,0,0,0.12);
 }
 
 h1{
     margin-bottom:6px;
-    font-size:38px;
+    font-size:clamp(32px,7vw,42px);
 }
 
 .subtitle{
     color:#666;
-    margin-bottom:26px;
+    margin-bottom:24px;
+    font-size:14px;
 }
 
 .explanation{
     text-align:left;
     background:#f8fafc;
     border-radius:18px;
-    padding:22px;
+    padding:18px;
     line-height:1.9;
     margin-bottom:28px;
-    font-size:16px;
+    font-size:15px;
 }
 
 .highlight{
@@ -56,10 +63,11 @@ h1{
     color:#7c2d12;
     border-radius:18px;
     padding:18px;
-    font-size:28px;
+    font-size:26px;
     font-weight:900;
     animation:startLuckyAnim 0.9s ease infinite alternate;
     box-shadow:0 0 20px rgba(250,204,21,0.7);
+    text-align:center;
 }
 
 @keyframes startLuckyAnim{
@@ -67,27 +75,34 @@ h1{
         transform:scale(1);
     }
     to{
-        transform:scale(1.05);
+        transform:scale(1.04);
     }
 }
 
 /* セントラルドグマ図 */
 
+.centralDogmaWrapper{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:20px 0;
+    padding-bottom:6px;
+}
+
 .centralDogma{
     display:flex;
     align-items:center;
-    justify-content:center;
-    gap:10px;
-    margin:24px 0;
-    overflow-x:auto;
-    padding-bottom:4px;
+    justify-content:flex-start;
+    gap:8px;
+    min-width:max-content;
+    margin:auto;
 }
 
 .cdBox{
     color:white;
     border-radius:16px;
-    padding:14px 16px;
-    min-width:110px;
+    padding:12px 14px;
+    width:110px;
     text-align:center;
     flex-shrink:0;
     box-shadow:0 4px 14px rgba(0,0,0,0.15);
@@ -106,7 +121,7 @@ h1{
 }
 
 .cdTitle{
-    font-size:20px;
+    font-size:18px;
     font-weight:800;
 }
 
@@ -121,15 +136,16 @@ h1{
     text-align:center;
     color:#64748b;
     flex-shrink:0;
+    width:52px;
 }
 
 .cdArrowText{
-    font-size:11px;
+    font-size:10px;
     font-weight:700;
 }
 
 .cdArrowSymbol{
-    font-size:26px;
+    font-size:24px;
     line-height:1;
 }
 
@@ -137,7 +153,7 @@ h1{
 
 .machine{
     margin:30px auto;
-    padding:30px 16px;
+    padding:26px 14px;
     border-radius:24px;
     background:
     linear-gradient(to bottom,#60a5fa,#2563eb);
@@ -167,19 +183,19 @@ h1{
 #slotContainer{
     display:flex;
     justify-content:center;
-    gap:14px;
-    margin-bottom:24px;
+    gap:12px;
+    margin-bottom:22px;
 }
 
 .slot{
-    width:90px;
-    height:110px;
+    width:84px;
+    height:102px;
     background:white;
     border-radius:18px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:60px;
+    font-size:56px;
     font-weight:bold;
     color:#1d4ed8;
     position:relative;
@@ -254,9 +270,9 @@ button{
     border-radius:18px;
     background:#facc15;
     color:#111827;
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
-    padding:16px 28px;
+    padding:16px 24px;
     cursor:pointer;
     width:100%;
     max-width:320px;
@@ -281,6 +297,7 @@ button:disabled{
 .section h2{
     border-bottom:2px solid #dbeafe;
     padding-bottom:8px;
+    font-size:22px;
 }
 
 .box{
@@ -289,10 +306,11 @@ button:disabled{
     padding:18px;
     line-height:1.8;
     margin-top:12px;
+    word-break:break-word;
 }
 
 .aminoName{
-    font-size:42px;
+    font-size:40px;
     font-weight:800;
     color:#1d4ed8;
     margin-bottom:10px;
@@ -301,29 +319,64 @@ button:disabled{
 .footer{
     margin-top:34px;
     color:#666;
-    font-size:14px;
+    font-size:13px;
 }
 
 @media(max-width:600px){
 
+    body{
+        padding:10px;
+    }
+
+    .container{
+        padding:18px 12px;
+        border-radius:20px;
+    }
+
     .slot{
-        width:72px;
-        height:88px;
-        font-size:46px;
+        width:68px;
+        height:84px;
+        font-size:42px;
     }
 
     button{
-        font-size:20px;
+        font-size:18px;
+        padding:14px 18px;
     }
 
     .aminoName{
-        font-size:34px;
+        font-size:32px;
     }
 
     .startLucky{
-        font-size:22px;
+        font-size:20px;
     }
 
+    .explanation{
+        font-size:14px;
+        padding:16px;
+    }
+
+    .cdBox{
+        width:96px;
+        padding:10px 10px;
+    }
+
+    .cdTitle{
+        font-size:16px;
+    }
+
+    .cdDesc{
+        font-size:10px;
+    }
+
+    .cdArrow{
+        width:42px;
+    }
+
+    .cdArrowSymbol{
+        font-size:20px;
+    }
 }
 
 </style>
@@ -363,6 +416,8 @@ DNAの情報はまず
 <span class="highlight">セントラルドグマ</span>
 と呼びます。
 
+<div class="centralDogmaWrapper">
+
 <div class="centralDogma">
 
 <div class="cdBox cdDNA">
@@ -397,6 +452,8 @@ DNAを書き写した<br>
 体を作り<br>
 働く分子
 </div>
+</div>
+
 </div>
 
 </div>
@@ -490,6 +547,7 @@ const codonDescriptions = {
 "UAA":"終止コドン。",
 "UAG":"終止コドン。",
 "UGA":"終止コドン。"
+
 };
 
 const codonTable = {
@@ -521,10 +579,19 @@ const codonTable = {
 
 };
 
+let audioCtx = null;
+
+function initAudio(){
+
+    if(!audioCtx){
+        audioCtx =
+        new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
 function playBeep(freq,duration){
 
-    const audioCtx =
-    new (window.AudioContext || window.webkitAudioContext)();
+    initAudio();
 
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -556,6 +623,8 @@ function playWin(){
 }
 
 async function drawCodon(){
+
+    initAudio();
 
     const button =
     document.getElementById("drawButton");
