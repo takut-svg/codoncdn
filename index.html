@@ -14,11 +14,10 @@
 
 body{
     margin:0;
-    padding:16px;
+    padding:12px;
     background:linear-gradient(to bottom,#eff6ff,#f8fafc);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     text-align:center;
-    color:#0f172a;
 }
 
 .container{
@@ -27,18 +26,18 @@ body{
     margin:auto;
     background:white;
     border-radius:24px;
-    padding:24px 16px;
+    padding:20px 14px;
     box-shadow:0 10px 30px rgba(0,0,0,0.12);
 }
 
 h1{
     margin-bottom:6px;
-    font-size:clamp(32px,7vw,42px);
+    font-size:clamp(28px,7vw,38px);
 }
 
 .subtitle{
     color:#666;
-    margin-bottom:24px;
+    margin-bottom:22px;
     font-size:14px;
 }
 
@@ -48,7 +47,7 @@ h1{
     border-radius:18px;
     padding:18px;
     line-height:1.9;
-    margin-bottom:28px;
+    margin-bottom:24px;
     font-size:15px;
 }
 
@@ -62,12 +61,11 @@ h1{
     background:linear-gradient(135deg,#fde68a,#facc15);
     color:#7c2d12;
     border-radius:18px;
-    padding:18px;
-    font-size:26px;
+    padding:16px;
+    font-size:24px;
     font-weight:900;
     animation:startLuckyAnim 0.9s ease infinite alternate;
     box-shadow:0 0 20px rgba(250,204,21,0.7);
-    text-align:center;
 }
 
 @keyframes startLuckyAnim{
@@ -81,28 +79,33 @@ h1{
 
 /* セントラルドグマ図 */
 
-.centralDogmaWrapper{
-    width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    margin:20px 0;
-    padding-bottom:6px;
-}
-
 .centralDogma{
     display:flex;
     align-items:center;
-    justify-content:flex-start;
-    gap:8px;
-    min-width:max-content;
-    margin:auto;
+    justify-content:center;
+    gap:6px;
+    margin:22px 0;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    padding-bottom:6px;
+    -webkit-overflow-scrolling:touch;
+}
+
+.centralDogma::-webkit-scrollbar{
+    height:6px;
+}
+
+.centralDogma::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:999px;
 }
 
 .cdBox{
     color:white;
-    border-radius:16px;
-    padding:12px 14px;
-    width:110px;
+    border-radius:14px;
+    padding:10px 10px;
+    width:92px;
+    min-width:92px;
     text-align:center;
     flex-shrink:0;
     box-shadow:0 4px 14px rgba(0,0,0,0.15);
@@ -121,39 +124,41 @@ h1{
 }
 
 .cdTitle{
-    font-size:18px;
+    font-size:16px;
     font-weight:800;
+    line-height:1.2;
 }
 
 .cdDesc{
-    font-size:11px;
+    font-size:10px;
     margin-top:4px;
     opacity:0.95;
-    line-height:1.4;
+    line-height:1.35;
 }
 
 .cdArrow{
     text-align:center;
     color:#64748b;
     flex-shrink:0;
-    width:52px;
+    width:36px;
 }
 
 .cdArrowText{
     font-size:10px;
     font-weight:700;
+    line-height:1.1;
 }
 
 .cdArrowSymbol{
-    font-size:24px;
+    font-size:22px;
     line-height:1;
 }
 
 /* スロット */
 
 .machine{
-    margin:30px auto;
-    padding:26px 14px;
+    margin:26px auto;
+    padding:24px 12px;
     border-radius:24px;
     background:
     linear-gradient(to bottom,#60a5fa,#2563eb);
@@ -183,19 +188,21 @@ h1{
 #slotContainer{
     display:flex;
     justify-content:center;
-    gap:12px;
-    margin-bottom:22px;
+    gap:10px;
+    margin-bottom:20px;
 }
 
 .slot{
-    width:84px;
-    height:102px;
+    width:min(22vw,82px);
+    height:min(26vw,96px);
+    min-width:64px;
+    min-height:76px;
     background:white;
     border-radius:18px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:56px;
+    font-size:clamp(36px,10vw,54px);
     font-weight:bold;
     color:#1d4ed8;
     position:relative;
@@ -237,7 +244,7 @@ h1{
 
 @keyframes flashAnim{
     0%{
-        transform:scale(1.2);
+        transform:scale(1.15);
         background:#fde68a;
     }
     100%{
@@ -252,10 +259,10 @@ h1{
 
 @keyframes bigWinAnim{
     0%{
-        transform:scale(0.95);
+        transform:scale(0.96);
     }
     35%{
-        transform:scale(1.08);
+        transform:scale(1.05);
     }
     60%{
         transform:scale(0.98);
@@ -272,7 +279,7 @@ button{
     color:#111827;
     font-size:22px;
     font-weight:bold;
-    padding:16px 24px;
+    padding:15px 24px;
     cursor:pointer;
     width:100%;
     max-width:320px;
@@ -290,7 +297,7 @@ button:disabled{
 }
 
 .section{
-    margin-top:30px;
+    margin-top:28px;
     text-align:left;
 }
 
@@ -303,40 +310,71 @@ button:disabled{
 .box{
     background:#f8fafc;
     border-radius:14px;
-    padding:18px;
+    padding:16px;
     line-height:1.8;
     margin-top:12px;
-    word-break:break-word;
+    font-size:15px;
 }
 
 .aminoName{
-    font-size:40px;
+    font-size:clamp(32px,9vw,42px);
     font-weight:800;
     color:#1d4ed8;
     margin-bottom:10px;
 }
 
 .footer{
-    margin-top:34px;
+    margin-top:30px;
     color:#666;
     font-size:13px;
 }
 
-@media(max-width:600px){
+/* スマホ最適化 */
+
+@media(max-width:480px){
 
     body{
-        padding:10px;
+        padding:8px;
     }
 
     .container{
-        padding:18px 12px;
-        border-radius:20px;
+        padding:16px 10px;
+        border-radius:18px;
     }
 
-    .slot{
-        width:68px;
-        height:84px;
-        font-size:42px;
+    .explanation{
+        padding:14px;
+        font-size:14px;
+    }
+
+    .cdBox{
+        width:82px;
+        min-width:82px;
+        padding:9px 8px;
+    }
+
+    .cdTitle{
+        font-size:14px;
+    }
+
+    .cdDesc{
+        font-size:9px;
+    }
+
+    .cdArrow{
+        width:28px;
+    }
+
+    .cdArrowSymbol{
+        font-size:18px;
+    }
+
+    .cdArrowText{
+        font-size:9px;
+    }
+
+    #slotContainer{
+        gap:8px;
     }
 
     button{
@@ -344,39 +382,10 @@ button:disabled{
         padding:14px 18px;
     }
 
-    .aminoName{
-        font-size:32px;
-    }
-
     .startLucky{
         font-size:20px;
     }
 
-    .explanation{
-        font-size:14px;
-        padding:16px;
-    }
-
-    .cdBox{
-        width:96px;
-        padding:10px 10px;
-    }
-
-    .cdTitle{
-        font-size:16px;
-    }
-
-    .cdDesc{
-        font-size:10px;
-    }
-
-    .cdArrow{
-        width:42px;
-    }
-
-    .cdArrowSymbol{
-        font-size:20px;
-    }
 }
 
 </style>
@@ -416,8 +425,6 @@ DNAの情報はまず
 <span class="highlight">セントラルドグマ</span>
 と呼びます。
 
-<div class="centralDogmaWrapper">
-
 <div class="centralDogma">
 
 <div class="cdBox cdDNA">
@@ -452,8 +459,6 @@ DNAを書き写した<br>
 体を作り<br>
 働く分子
 </div>
-</div>
-
 </div>
 
 </div>
@@ -539,6 +544,7 @@ const aminoInfo = {
 "Glu":"グルタミン酸：興奮性神経伝達物質。",
 "Gly":"グリシン：最小のアミノ酸。",
 "STOP":"終止コドン。"
+
 };
 
 const codonDescriptions = {
@@ -579,19 +585,10 @@ const codonTable = {
 
 };
 
-let audioCtx = null;
-
-function initAudio(){
-
-    if(!audioCtx){
-        audioCtx =
-        new (window.AudioContext || window.webkitAudioContext)();
-    }
-}
-
 function playBeep(freq,duration){
 
-    initAudio();
+    const audioCtx =
+    new (window.AudioContext || window.webkitAudioContext)();
 
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -623,8 +620,6 @@ function playWin(){
 }
 
 async function drawCodon(){
-
-    initAudio();
 
     const button =
     document.getElementById("drawButton");
@@ -721,7 +716,8 @@ async function drawCodon(){
     document.getElementById("codonInfo").innerHTML =
     codonText;
 
-    button.textContent = "抽選終了";
+    button.textContent = "もう一回引く";
+    button.disabled = false;
 }
 
 </script>
